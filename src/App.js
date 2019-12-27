@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import Trivia from './components/Trivia';
+import Results from './components/Results';
 
 class App extends Component {
   constructor(props) {
@@ -22,6 +23,8 @@ class App extends Component {
     this.getAnswerOptions = this.getAnswerOptions.bind(this);
     this.updateQuestion = this.updateQuestion.bind(this);
     this.answerSelected = this.answerSelected.bind(this);
+    this.getResults = this.getResults.bind(this);
+    this.resetApp = this.resetApp.bind(this);
   }
 
   startTrivia() {
@@ -94,6 +97,10 @@ class App extends Component {
     });
   }
 
+  resetApp() {
+    
+  }
+
   componentDidMount() {
     var questions = [
       {
@@ -160,6 +167,12 @@ class App extends Component {
               <button onClick={this.startTrivia}>Start Trivia</button>
             </div>
             }
+            {this.state.showResults ? 
+            <Results 
+              score={this.state.score}
+              questionTotal={this.state.questionTotal}
+              reset={this.resetApp}
+            /> : null}
         </header>
       </div>
     );
