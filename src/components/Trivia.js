@@ -9,6 +9,7 @@ function Trivia(props) {
           <AnswerOption
             key={key + props.counter}
             answerContent={key}
+            answerSelected={props.answerSelected}
           />
         );
     }

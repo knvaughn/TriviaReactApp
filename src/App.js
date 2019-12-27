@@ -10,12 +10,18 @@ class App extends Component {
       questions: [],
       counter: 0,
       questionTotal: 0,
+      score: 0,
       answer: '',
-      showTrivia: false
+      answerOptions: [],
+      showTrivia: false,
+      clicked: false,
+      showResults: false
     };
 
     this.startTrivia = this.startTrivia.bind(this);
     this.getAnswerOptions = this.getAnswerOptions.bind(this);
+    this.updateQuestion = this.updateQuestion.bind(this);
+    this.answerSelected = this.answerSelected.bind(this);
   }
 
   startTrivia() {
@@ -37,6 +43,56 @@ class App extends Component {
     shuffle(answers);
     return answers;
   };
+
+  updateQuestion() {
+    this.setState((prevState) => ({
+      counter: prevState.counter + 1
+    }), () => {
+      this.setState({
+        answerOptions: this.getAnswerOptions(this.state.questions),
+        answer: this.state.questions[this.state.counter].correct_answer,
+        clicked: false
+      });
+    });
+  }
+
+  answerSelected(event) {
+    this.setState({
+      clicked: true
+    });
+    if(!this.state.clicked) {
+      var li = event.currentTarget;
+      var span = li.querySelector('span');
+      var selected = span.innerText;
+      if(selected === this.state.answer) {
+        li.className += " correct";
+        this.setState((prevState) => ({
+          score: prevState.score + 1
+        }));
+      } else {
+        li.className += " incorrect";
+        var options = document.querySelectorAll('.answerOption');
+        for(var i = 0; i < options.length; i++) {
+          var item = options[i];
+          var text = item.querySelector('span').innerText;
+          if(text === this.state.answer) {
+            item.className += " highlight";
+          }
+
+        }
+      }
+      setTimeout(() => {
+        var questionNumber = this.state.counter;
+        questionNumber === this.state.questions.length - 1 ? this.getResults() : this.updateQuestion();
+      }, 1500)
+    }
+  }
+
+  getResults() {
+    this.setState({
+      showResults: true
+    });
+  }
 
   componentDidMount() {
     var questions = [
@@ -97,6 +153,7 @@ class App extends Component {
               questionTotal={this.state.questionTotal} 
               question={this.state.questions[this.state.counter].question}
               answerOptions={this.state.answerOptions}
+              answerSelected={this.answerSelected}
             /> :
             <div className="landing">
               <h1>Trivia</h1>
