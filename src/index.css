@@ -20,7 +20,7 @@ h2 {
   background: none;
   font-weight: bold;
   color: #fff;
-  padding: 10px 20px;
+  padding: 15px 20px;
   width: 100%;
   transition: all .2s;
 }
@@ -29,6 +29,22 @@ h2 {
   cursor: pointer;
   background: #fff;
   color: #3D5AFE;
+}
+
+.btn-secondary {
+  border: none;
+  font-weight: bold;
+  padding: 15px 20px;
+  width: 100%;
+  max-width: 200px;
+  transition: all .2s;
+  background: #F06292;
+  color: #fff;
+}
+
+.btn-secondary:hover {
+  cursor: pointer;
+  background: #f07da4;
 }
 
 .landing {
