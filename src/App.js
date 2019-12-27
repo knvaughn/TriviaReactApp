@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
+import FadeIn from 'react-fade-in';
 import Trivia from './components/Trivia';
 import Results from './components/Results';
 
@@ -186,10 +187,12 @@ class App extends Component {
               answerOptions={this.state.answerOptions}
               answerSelected={this.answerSelected}
             /> :
-            <div className="landing">
-              <h1>Trivia</h1>
-              <button className="btn" onClick={this.startTrivia}>Start Trivia</button>
-            </div>
+            <FadeIn>
+              <div className="landing">
+                <h1>Trivia</h1>
+                <button className="btn" onClick={this.startTrivia}>Start Trivia</button>
+              </div>
+            </FadeIn>
             }
             {this.state.showResults ? 
             <Results 
