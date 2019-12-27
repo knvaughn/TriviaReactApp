@@ -27,6 +27,23 @@ class App extends Component {
     this.resetApp = this.resetApp.bind(this);
   }
 
+  getData() {
+    var url = "https://opentdb.com/api.php?amount=10";
+    return fetch(url)
+    .then((response) => {
+      return response.json()
+    })
+    .then((data) => {
+      console.log('data', data)
+      this.setState({
+        questions: data.results
+      })
+    })
+    .catch((err) => {
+      console.log('Error: ', err);
+    });
+  }
+
   startTrivia() {
     this.setState({
       showTrivia: true,
@@ -98,55 +115,31 @@ class App extends Component {
   }
 
   resetApp() {
-    
+    this.getData().then(() => {
+      this.setState({
+        showQuiz: false,
+        showResults: false,
+        counter: 0,
+        questionTotal: this.state.questions.length,
+        answer: this.state.questions[0].correct_answer,
+        score: 0,
+        clicked: false
+      });
+    }).then(() => {
+      this.setState({
+        answerOptions: this.getAnswerOptions(this.state.questions)
+      })
+    });
   }
 
   componentDidMount() {
-    var questions = [
-      {
-      category: "Geography",
-      type: "multiple",
-      difficulty: "medium",
-      question: "What European country is not a part of the EU?",
-      correct_answer: "Norway",
-      incorrect_answers: [
-      "Lithuania",
-      "Ireland",
-      "Czechia"
-      ]
-      },
-      {
-      category: "Sports",
-      type: "multiple",
-      difficulty: "medium",
-      question: "In a game of snooker, what colour ball is worth 3 points?",
-      correct_answer: "Green",
-      incorrect_answers: [
-      "Yellow",
-      "Brown",
-      "Blue"
-      ]
-      },
-      {
-      category: "General Knowledge",
-      type: "multiple",
-      difficulty: "hard",
-      question: "Which film star has his statue in Leicester Square?",
-      correct_answer: "Charlie Chaplin",
-      incorrect_answers: [
-      "Paul Newman",
-      "Rowan Atkinson ",
-      "Alfred Hitchcock"
-      ]
-      }
-      ];
-
-      this.setState({ 
-        questions: questions,
-        questionTotal: questions.length,
-        answer: questions[0].correct_answer,
-        answerOptions: this.getAnswerOptions(questions)
+    this.getData().then(() => {
+      this.setState({
+        questionTotal: this.state.questions.length,
+        answer: this.state.questions[0].correct_answer,
+        answerOptions: this.getAnswerOptions(this.state.questions)
       });
+    });
   }
 
   render() {
