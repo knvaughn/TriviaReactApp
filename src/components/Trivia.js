@@ -1,4 +1,5 @@
 import React from 'react';
+import '../css/Trivia.css';
 import Question from '../components/Question';
 import QuestionCounter from '../components/QuestionCounter';
 import AnswerOption from '../components/AnswerOption';
