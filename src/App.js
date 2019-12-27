@@ -157,7 +157,7 @@ class App extends Component {
             /> :
             <div className="landing">
               <h1>Trivia</h1>
-              <button onClick={this.startTrivia}>Start Trivia</button>
+              <button className="btn" onClick={this.startTrivia}>Start Trivia</button>
             </div>
             }
             {this.state.showResults ? 
