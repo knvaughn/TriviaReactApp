@@ -111,7 +111,6 @@ class App extends Component {
   }
 
   getResults() {
-    this.insult();
     this.setState({
       showResults: true
     });
@@ -171,6 +170,7 @@ class App extends Component {
         answerOptions: this.getAnswerOptions(this.state.questions)
       });
     });
+    this.insult();
   }
 
   render() {

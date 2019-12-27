@@ -8,7 +8,7 @@ function Results(props) {
             <h2 className="results">Results</h2>
             <p className="score">{props.score} / {props.questionTotal}</p>
             {props.score/props.questionTotal<.5 ? 
-            <p className="insult">{props.insult}</p> : null}
+            <p className="insult" dangerouslySetInnerHTML={{ __html: props.insult }}></p> : null}
             <button className="btn-secondary" onClick={props.reset}>Play Again</button>
         </div>
     </div>
