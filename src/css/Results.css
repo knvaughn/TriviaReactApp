@@ -37,5 +37,12 @@
     color: #999;
     font-size: 1.5em;
     font-style: italic;
-    margin-top: 0;
+    margin: 0 0 20px;
+}
+
+.insult {
+    font-style: italic;
+    margin: 30px 0 30px;
+    font-size: .9em;
+    width: 80%;
 }

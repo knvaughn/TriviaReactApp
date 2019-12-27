@@ -16,7 +16,8 @@ class App extends Component {
       answerOptions: [],
       showTrivia: false,
       clicked: false,
-      showResults: false
+      showResults: false,
+      insult: ''
     };
 
     this.startTrivia = this.startTrivia.bind(this);
@@ -25,6 +26,7 @@ class App extends Component {
     this.answerSelected = this.answerSelected.bind(this);
     this.getResults = this.getResults.bind(this);
     this.resetApp = this.resetApp.bind(this);
+    this.insult = this.insult.bind(this);
   }
 
   getData() {
@@ -109,6 +111,7 @@ class App extends Component {
   }
 
   getResults() {
+    this.insult();
     this.setState({
       showResults: true
     });
@@ -129,6 +132,34 @@ class App extends Component {
       this.setState({
         answerOptions: this.getAnswerOptions(this.state.questions)
       })
+    });
+  }
+
+  insult() {
+    var insultUrl = "https://evilinsult.com/generate_insult.php?lang=en&type=json";
+
+    function corsProxy(url) {
+      var proxyUrl = 'https://mighty-scrubland-05932.herokuapp.com/',
+      targetUrl = url;
+      return fetch(proxyUrl + targetUrl)
+      .then(response => response.json())
+      .then(data => {
+          return data;
+      })
+      .catch(e => {
+          console.log(e);
+          return e;
+      });
+    }
+
+    corsProxy(insultUrl)
+    .then((data) => {
+      this.setState({
+        insult: data.insult
+      })
+    })
+    .catch((err) => {
+      console.log('Error: ', err);
     });
   }
 
@@ -165,6 +196,7 @@ class App extends Component {
               score={this.state.score}
               questionTotal={this.state.questionTotal}
               reset={this.resetApp}
+              insult={this.state.insult}
             /> : null}
         </header>
       </div>
