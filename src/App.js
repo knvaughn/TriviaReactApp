@@ -80,6 +80,7 @@ class App extends Component {
               counter={this.state.counter} 
               questionTotal={this.state.questionTotal} 
               question={this.state.questions[this.state.counter].question}
+              answerOptions={['one', 'two', 'three']}
             /> :
             <div className="landing">
               <h1>Trivia</h1>
