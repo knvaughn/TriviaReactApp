@@ -1,14 +1,29 @@
-.correct {
-    background: #fff;
-    color: green;
-  }
+.answerOption.correct {
+    background: #f0f9f2;
+    color: #42bb4b;
+    border: 1px solid #42bb4b;
+}
   
-  .incorrect {
-    background: #fff;
-    color: red;
-  }
-  
-  .highlight {
-    background: #fff;
-    color: blue;
-  }
+.answerOption.incorrect {
+    background: #fdf3f8;
+    color: #f75589;
+    border: 1px solid #f75589;
+}
+
+.answerOption {
+    list-style-position:inside;
+    margin-bottom: 15px;
+    padding: 10px 10px 10px 20px;;
+    border: 1px solid #6053c9;
+    border-radius: 30px;
+    transition: all .2s;
+}
+
+.answerOption span {
+    margin-left: 10px;
+}
+
+.answerOption:hover {
+    cursor: pointer;
+    background: #f0f1f9;
+}

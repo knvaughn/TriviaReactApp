@@ -96,7 +96,7 @@ class App extends Component {
           var item = options[i];
           var text = item.querySelector('span').innerText;
           if(text === this.state.answer) {
-            item.className += " highlight";
+            item.className += " correct";
           }
 
         }

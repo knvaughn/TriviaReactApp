@@ -8,13 +8,15 @@
     align-items: center;
     justify-content: center;
     background: rgba(0,0,0,.5);
+    padding: 20px;
+    box-sizing: border-box;
 }
   
 .modalInner {
     background: #fff;
     color: #333;
     padding: 20px;
-    margin: 20px;
+    box-sizing: border-box;
     width: 100%;
     max-width: 600px;
     height: 80vh;
@@ -22,4 +24,11 @@
     flex-flow: column nowrap;
     justify-content: center;
     align-items: center;
+    border-radius: 30px;
+}
+
+.results {
+    font-family: 'Satisfy', cursive;
+    font-size: 3em;
+    margin: 0 0 20px;
 }
